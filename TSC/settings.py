@@ -30,7 +30,6 @@ ALLOWED_HOSTS = [
     'localhost',
     '127.0.0.1',
     '.vercel.app',
-    'tiwari-saree-center-doxrvvvlf-devanshu-tripathis-projects.vercel.app'
 ] if ENVIRONMENT == 'production' else ['localhost', '127.0.0.1']
 
 

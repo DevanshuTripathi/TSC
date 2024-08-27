@@ -9,11 +9,14 @@ from django.urls import reverse
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.views.decorators.csrf import csrf_exempt
 
-from .models import User
+from .models import User, Item
 # Create your views here.
 
 def index(request):
-    return HttpResponse('Hello')
+    items = Item.objects.all()
+    return render(request, "inventory_management/index.html", {
+        'items':items,
+    })
 
 def login_view(request):
     if request.method == "POST":

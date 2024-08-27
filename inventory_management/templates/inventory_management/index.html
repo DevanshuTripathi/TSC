@@ -1,5 +1,62 @@
 {% extends 'inventory_management/layout.html' %}
 
 {% block body %}
+        <div class="container">
+            <div class="dropdown">
+                <input type="text" placeholder="Search.." id="myInput" onkeyup="filterFunction()" onclick="toggleDropdown()">
+                <div id="myDropdown" class="dropdown-content">
+                  {% for item in items %}
+                  <a href="javascript:void(0);" onclick="selectItem('{{ item.name }}', '{{ item.price }}', '{{ item }}')">{{ item }}</a>
+                  {% endfor %}
+                </div>
+              </div>
+              <div id="priceDisplay" class="price-display"></div>
+        </div>
 
+    <script>
+        // Toggle the dropdown visibility
+        function toggleDropdown() {
+            document.getElementById("myDropdown").classList.toggle("show");
+        }
+
+        // Filter function
+        function filterFunction() {
+            var input, filter, div, a, i;
+            input = document.getElementById("myInput");
+            filter = input.value.toUpperCase();
+            div = document.getElementById("myDropdown");
+            a = div.getElementsByTagName("a");
+            for (i = 0; i < a.length; i++) {
+                txtValue = a[i].textContent || a[i].innerText;
+                if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                    a[i].style.display = "";
+                } else {
+                    a[i].style.display = "none";
+                }
+            }
+        }
+
+        // Function to select an item, populate the input field, and display the price
+        function selectItem(name, price, item) {
+            document.getElementById("myInput").value = item;
+            toggleDropdown(); // Close dropdown after selection
+
+            // Display the price
+            var priceDisplay = document.getElementById("priceDisplay");
+            priceDisplay.innerHTML = "Price: ₹" + price;
+        }
+
+        // Close the dropdown if the user clicks outside of it
+        window.onclick = function(event) {
+            if (!event.target.matches('#myInput')) {
+                var dropdowns = document.getElementsByClassName("dropdown-content");
+                for (var i = 0; i < dropdowns.length; i++) {
+                    var openDropdown = dropdowns[i];
+                    if (openDropdown.classList.contains('show')) {
+                        openDropdown.classList.remove('show');
+                    }
+                }
+            }
+        }
+    </script>
 {% endblock %}

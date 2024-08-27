@@ -20,7 +20,7 @@
               <ul class="navbar-nav mr-auto">
                 {% if user.is_authenticated %}
                     <li class="nav-item">
-                        <strong>{{ user.username }}</strong>
+                        <strong class="nav-link">Signed in as {{ user.username }}</strong>
                     </li>
                 {% endif %}
                 {% if user.is_authenticated %}
